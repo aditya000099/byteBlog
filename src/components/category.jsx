@@ -23,7 +23,7 @@ const logos = [
     { name: 'React', imageSrc: react },
     { name: 'Next.js', imageSrc: next },
     { name: 'AngularJS', imageSrc: ang },
-    { name: 'Vue.js', imageSrc: chat},
+    { name: 'AI', imageSrc: chat},
     { name: 'Rust', imageSrc: rust },
     { name: 'Blockchain', imageSrc: bit },
   ];

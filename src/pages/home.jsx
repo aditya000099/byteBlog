@@ -2,6 +2,8 @@ import React from 'react';
 import Category from "../components/category";
 import Header from "../components/header";
 import FeaturedSection from '../components/featured';
+import SubscribeSection from '../components/subscribe';
+import Footer from '../components/footer';
 
 const HomePage = () => {
   return (
@@ -11,6 +13,8 @@ const HomePage = () => {
       <Header />
       <FeaturedSection/>
       <Category/>
+      <SubscribeSection />
+      <Footer />
       </div>
     </div>
   )
