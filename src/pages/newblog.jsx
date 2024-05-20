@@ -1,0 +1,117 @@
+import React, { useState } from "react";
+import { Client, Databases, ID, Storage } from "appwrite";
+
+const client = new Client()
+  .setEndpoint("https://cloud.appwrite.io/v1")
+  .setProject("6643380c00076d57eba2");
+
+const databases = new Databases(client);
+
+const storage = new Storage(client);
+
+const CreateBlogPost = () => {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [photo, setPhoto] = useState(null);
+
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const handleDescriptionChange = (e) => {
+    setDescription(e.target.value);
+  };
+
+  const handlePhotoChange = async (e) => {
+    if (!e.target.files || e.target.files.length === 0) {
+      console.error('No file selected.');
+      return ''; // Return an empty string or handle the error as needed
+    }
+  
+    const file = e.target.files[0];
+    const storage = new Storage(client);
+  
+    try {
+      // Upload photo to Appwrite storage
+      const photoResponse = await storage.createFile("blogphotos", ID.unique(), file);
+      console.log('Photo uploaded:', photoResponse);
+  
+      // Assuming photoResponse contains the file ID
+      const photoId = photoResponse.$url;// Extract the file ID from the response
+  
+      // Return the file ID as a string
+      console.log(photoId);
+      return photoId; // Convert the file ID to a string
+    } catch (error) {
+      console.error('Error uploading photo:', error);
+      return ''; // Return an empty string or handle the error as needed
+    }
+  };
+  
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      // Get the photo ID from handlePhotoChange function
+      const photoId = await handlePhotoChange(e);
+
+      const post = await databases.createDocument(
+        "database",
+        "blogs",
+        ID.unique(),
+        { title: title, body: description, photo: photoId }
+      );
+
+      console.log("Blog post created:", post);
+    } catch (error) {
+      console.error("Error creating blog post:", error);
+    }
+  };
+
+  return (
+    <div className="max-w-xl mx-auto px-4">
+      <h1 className="text-2xl font-bold mb-4">Create Blog Post</h1>
+      <form onSubmit={handleSubmit}>
+        <div className="mb-4">
+          <label className="block mb-1">Title:</label>
+          <input
+            type="text"
+            value={title}
+            onChange={handleTitleChange}
+            className="w-full border border-gray-300 rounded-md py-2 px-4"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block mb-1">Description:</label>
+          <textarea
+            value={description}
+            onChange={handleDescriptionChange}
+            className="w-full border border-gray-300 rounded-md py-2 px-4"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block mb-1">Photo:</label>
+          <input
+            type="file"
+            accept="image/*"
+            id="uploader"
+            onChange={handlePhotoChange}
+            className="w-full border border-gray-300 rounded-md py-2 px-4"
+            required
+          />
+        </div>
+        <button
+          type="submit"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  );
+};
+
+export default CreateBlogPost;

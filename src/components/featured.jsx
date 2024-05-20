@@ -13,15 +13,6 @@ const FeaturedSection = () => {
         },
       ];
 
-    //   const ImageBox = ({ imageUrl, title, description }) => (
-    //     <div className="image-container relative rounded-lg overflow-hidden flex justify-center content-center">
-    //       <img src={imageUrl} alt={title} className="w-scree w-2/3 h-auto rounded-lg" />
-    //       <div className="text-box absolute bg-white bottom-0 left-4/12 w-4/12 p-4 rounded-lg shadow-md">
-    //         <h2 className="text-lg font-semibold">{title}</h2>
-    //         <p className="text-sm mt-2">{description}</p>
-    //       </div>
-    //     </div>
-    //   );
 
   return (
     <div className="mt-6 relative height-auto">

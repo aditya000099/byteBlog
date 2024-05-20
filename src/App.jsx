@@ -4,6 +4,7 @@ import HomePage from "./pages/home";
 import ErrorPage from "./pages/error";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import CreateBlogPost from "./pages/newblog";
 
 // import cursor from '../public/cursor.png';
 
@@ -21,6 +22,7 @@ const App = () => {
       <Router>
         <Routes>
           <Route exact path="/" element={<HomePage />} />
+          <Route exact path="/new" element={<CreateBlogPost />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </Router>

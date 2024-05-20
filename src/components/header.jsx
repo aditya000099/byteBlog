@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 // import { faPen, faBell, faUserCircle } from "@fortawesome/free-solid-svg-icons";
 // import { faPenToSquare, faBell, faUserCircle } from "@fortawesome/free-regular-svg-icons";
 import {
@@ -34,23 +34,31 @@ const Header = () => {
 
       <div className="flex items-center space-x-10">
         {/* Home link */}
-        <Link to="/" className="cursor-pointer text-gray-900">Home</Link>
+        <Link to="/" className="cursor-pointer text-gray-900">
+          Home
+        </Link>
 
         {/* About Us link */}
-        <Link to="/about" className="cursor-pointer text-gray-900">About Us</Link>
+        <Link to="/about" className="cursor-pointer text-gray-900">
+          About Us
+        </Link>
 
         {/* Get Pro link */}
-        <Link to="/pro" className="cursor-pointer text-gray-900">Get Pro!</Link>
+        <Link to="/pro" className="cursor-pointer text-gray-900">
+          Get Pro!
+        </Link>
       </div>
 
       {/* Right side items */}
       <div className="flex items-center space-x-4">
         {/* Write an article icon with outline and grey color */}
-        <FontAwesomeIcon
-          icon={faPenToSquare}
-          size="lg"
-          className="cursor-pointer p-2 text-gray-500 fa-fw fa-inverse"
-        />
+        <Link to="/new">
+          <FontAwesomeIcon
+            icon={faPenToSquare}
+            size="lg"
+            className="cursor-pointer p-2 text-gray-500 fa-fw fa-inverse"
+          />
+        </Link>
 
         {/* Notifications icon with outline and grey color */}
         <FontAwesomeIcon
