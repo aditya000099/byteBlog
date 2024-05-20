@@ -7,6 +7,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import CreateBlogPost from "./pages/newblog";
 import Login from "./pages/login";
 import Signup from "./pages/signup";
+import BlogDetail from "./pages/fullblog";
+import CategoryBlogs from "./pages/categoryBlogs";
 
 // import cursor from '../public/cursor.png';
 
@@ -39,6 +41,8 @@ const App = () => {
           <Route exact path="/login" element={<Login/>} />
           <Route exact path="/signup" element={<Signup/>} />
           <Route exact path="/dashboard" element={<HomePage/>} />
+          <Route path="/blog/:id" element={<BlogDetail />} />
+          <Route path="/category/:category" element={<CategoryBlogs />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </Router>

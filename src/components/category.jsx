@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useNavigate } from 'react-router-dom';
 // import { faReact, faJs, faAngular, faVuejs, faCss3Alt } from '@fortawesome/free-brands-svg-icons';
 import react from '../../public/react.png'
 import next from '../../public/next.png'
@@ -11,6 +12,12 @@ import bit from '../../public/bit.png'
 import "../index.css";
 
 const Category = () => {
+  const navigate = useNavigate();
+
+  const handleBlogClick = (category) => {
+    navigate(`/category/${category}`);
+};
+
 //   const [theme, setTheme] = useState("light");
 
 //   const toggleTheme = () => {
@@ -31,7 +38,7 @@ const logos = [
   const colors = ['#74C0FC', '#FFD700', '#FF69B4', '#32CD32' , '#74C0FC'];
 
   return (
-    <div className="w-full pt-16">
+    <div className="w-full pt-16" >
   <div className="flex justify-between">
     <span className="cursor-pointer pl-12 text-xl">Browse By Category</span>
     <span className="cursor-pointer pr-12 text-lg">See all categories {"->"}</span>
@@ -42,6 +49,7 @@ const logos = [
     {logos.map((item, index) => (
       <div
         key={index}
+        onClick={() => handleBlogClick(item.name)}
         className='w-48 p-4 bg-white shadow-md rounded-md text-center transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer flex flex-col justify-center items-center h-52 hover:bg-purple-600 hover:text-white'
       >
         <img src={item.imageSrc} alt={item.name} className='w-12 h-12 mb-2' /> {/* Use local image */}

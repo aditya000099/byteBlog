@@ -5,6 +5,7 @@ import FeaturedSection from '../components/featured';
 import SubscribeSection from '../components/subscribe';
 import Footer from '../components/footer';
 import Blogs from '../components/homeblogs';
+import News from './newspage';
 
 const HomePage = () => {
   return (
@@ -15,6 +16,7 @@ const HomePage = () => {
       <FeaturedSection/>
       <Category/>
       <Blogs />
+      <News />
       <SubscribeSection />
       <Footer />
       </div>

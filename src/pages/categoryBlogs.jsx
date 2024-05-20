@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 // import { databases } from '../appwriteConfig'; // Make sure this points to your Appwrite configuration file
 import sampleImage from '../../public/cursor.png'; // Replace with the path to your static image
-import { Client, Databases, ID, Storage, Account } from "appwrite";
+import { Client, Databases, ID, Storage, Account, Query } from "appwrite";
 
 const client = new Client()
   .setEndpoint("https://cloud.appwrite.io/v1")
@@ -14,14 +15,19 @@ const storage = new Storage(client);
 
 const account = new Account(client);
 
-const Blogs = () => {
+const CategoryBlogs = () => {
     const [blogs, setBlogs] = useState([]);
     const navigate = useNavigate();
+
+    const { category } = useParams();
+    // const [blog, setBlog] = useState(null);
 
     useEffect(() => {
         const fetchBlogs = async () => {
             try {
-                const response = await databases.listDocuments('database', 'blogs');
+                const response = await databases.listDocuments('database', 'blogs', [
+                    Query.equal('tagone', category)
+                ]);
                 setBlogs(response.documents);
             } catch (error) {
                 console.error('Failed to fetch blogs', error);
@@ -66,4 +72,4 @@ const Blogs = () => {
     );
 };
 
-export default Blogs;
+export default CategoryBlogs;

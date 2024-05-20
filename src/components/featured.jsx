@@ -1,8 +1,42 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import feat from '../../public/feat.png'
 import feat3 from '../../public/feat3.png'
+import { Client, Databases, ID, Storage, Account, Query } from "appwrite";
+
+const client = new Client()
+  .setEndpoint("https://cloud.appwrite.io/v1")
+  .setProject("6643380c00076d57eba2");
+
+const databases = new Databases(client);
+
+const storage = new Storage(client);
+
+const account = new Account(client);
 
 const FeaturedSection = () => {
+
+  const [blogs, setBlogs] = useState([]);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const fetchBlogs = async () => {
+            try {
+                const response = await databases.listDocuments('database', 'blogs', [
+                  Query.equal('featured', "true")
+              ]);
+                setBlogs(response.documents);
+            } catch (error) {
+                console.error('Failed to fetch blogs', error);
+            }
+        };
+
+        fetchBlogs();
+    }, []);
+
+    const handleBlogClick = (id) => {
+        navigate(`/blog/${id}`);
+    };
 
     const data = [
         {
@@ -18,13 +52,13 @@ const FeaturedSection = () => {
     <div className="mt-6 relative height-auto">
     <div className='flex justify-center content-center text-4xl font-extrabold mb-6'>Featured Blog</div>
     <div className="container">
-      {data.map(item => (
-        <div key={item.id} className="image-container rounded-xl overflow-hidden flex justify-center content-center">
-          <img src={item.imageUrl} alt={item.title} className="w-2/3 h-auto rounded-lg" />
+      {blogs.map(blog=> (
+        <div key={blog.$id} onClick={() => handleBlogClick(blog.$id)} className="image-container rounded-xl overflow-hidden flex justify-center content-center">
+          <img src={blog.photo} alt={blog.title} className="w-2/3 h-auto rounded-lg" />
           <div className="text-box absolute bg-white bottom-4 left-4/12 w-4/12 p-4 rounded-xl shadow-md transition duration-300 ease-in-out">
-            <h2 className="text-lg font-semibold">{item.title}</h2>
+            <h2 className="text-lg font-semibold">{blog.title}</h2>
             <p className="text-sm mt-2 overflow-hidden" style={{ maxHeight: '3em', textOverflow: 'ellipsis', whiteSpace: 'normal', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical' }}>
-              {item.description}
+              {blog.body}
             </p>
           </div>
         </div>
