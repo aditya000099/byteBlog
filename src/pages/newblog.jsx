@@ -70,48 +70,50 @@ const CreateBlogPost = () => {
   };
 
   return (
-    <div className="max-w-xl mx-auto px-4">
-      <h1 className="text-2xl font-bold mb-4">Create Blog Post</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="max-w-xl mx-auto px-4 py-8 bg-gray-900 text-white rounded-lg shadow-lg">
+      <h1 className="text-3xl font-bold mb-6 text-center">Create Blog Post</h1>
+      <form onSubmit={handleSubmit} className="space-y-6">
         <div className="mb-4">
-          <label className="block mb-1">Title:</label>
+          <label className="block mb-2 text-lg font-medium">Title:</label>
           <input
             type="text"
             value={title}
             onChange={handleTitleChange}
-            className="w-full border border-gray-300 rounded-md py-2 px-4"
+            className="w-full border border-gray-600 rounded-md py-2 px-4 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
         </div>
         <div className="mb-4">
-          <label className="block mb-1">Description:</label>
+          <label className="block mb-2 text-lg font-medium">Description:</label>
           <textarea
             value={description}
             onChange={handleDescriptionChange}
-            className="w-full border border-gray-300 rounded-md py-2 px-4"
+            className="w-full border border-gray-600 rounded-md py-2 px-4 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
+            rows="5"
           />
         </div>
         <div className="mb-4">
-          <label className="block mb-1">Photo:</label>
+          <label className="block mb-2 text-lg font-medium">Photo:</label>
           <input
             type="file"
             accept="image/*"
             id="uploader"
             onChange={handlePhotoChange}
-            className="w-full border border-gray-300 rounded-md py-2 px-4"
+            className="w-full border border-gray-600 rounded-md py-2 px-4 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
         </div>
         <button
           type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         >
           Submit
         </button>
       </form>
     </div>
   );
+
 };
 
 export default CreateBlogPost;

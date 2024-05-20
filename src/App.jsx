@@ -5,6 +5,8 @@ import ErrorPage from "./pages/error";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import CreateBlogPost from "./pages/newblog";
+import Login from "./pages/login";
+import Signup from "./pages/signup";
 
 // import cursor from '../public/cursor.png';
 
@@ -16,16 +18,31 @@ const App = () => {
   //   document.documentElement.setAttribute('data-theme', newTheme);
   //   setTheme(newTheme);
   // };
+  const [darkMode, setDarkMode] = useState(true);
 
   return (
     <>
+    {/* <div className={darkMode ? 'dark' : ''}>
+            <div className="p-4 bg-gray-800 text-white flex justify-between">
+                <h1 className="text-xl font-bold">My App</h1>
+                <button
+                    className="p-2 bg-gray-700 rounded"
+                    onClick={() => setDarkMode(!darkMode)}
+                >
+                    Toggle Dark Mode
+                </button>
+            </div> */}
       <Router>
         <Routes>
           <Route exact path="/" element={<HomePage />} />
           <Route exact path="/new" element={<CreateBlogPost />} />
+          <Route exact path="/login" element={<Login/>} />
+          <Route exact path="/signup" element={<Signup/>} />
+          <Route exact path="/dashboard" element={<HomePage/>} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </Router>
+      {/* </div> */}
     </>
   );
 };
