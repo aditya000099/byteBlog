@@ -19,7 +19,17 @@ const Signup = () => {
     const handleSignup = async (e) => {
         e.preventDefault();
         try {
-            await account.create('unique()', email, password, name);
+            await account.create('unique()', email, password, name).then((response) => {
+                const post = databases.createDocument(
+                    "database",
+                    "users",
+                    ID.unique(),
+                    { name: name, email: email, id: response.$id}
+                  );
+            
+                  console.log("User created:", post);
+                console.log('Signup successful! Please login.');
+            });
             alert('Signup successful! Please login.');
         } catch (error) {
             console.error(error);

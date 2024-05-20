@@ -11,6 +11,7 @@ import {
   faToggleOff,
 } from "@fortawesome/free-solid-svg-icons";
 import logoImage from "../../public/logo2.png"; // Replace './logo.png' with the actual path to your logo image
+import SearchBar from "./searchbar";
 
 const Header = () => {
   const [theme, setTheme] = useState("light");
@@ -51,6 +52,7 @@ const Header = () => {
 
       {/* Right side items */}
       <div className="flex items-center space-x-4">
+      <SearchBar />
         {/* Write an article icon with outline and grey color */}
         <Link to="/new">
           <FontAwesomeIcon

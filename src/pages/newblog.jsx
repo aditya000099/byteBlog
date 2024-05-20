@@ -70,7 +70,7 @@ const CreateBlogPost = () => {
   };
 
   return (
-    <div className="max-w-xl mx-auto px-4 py-8 bg-gray-900 text-white rounded-lg shadow-lg">
+    <div className="max-w-xl mx-auto px-4 py-8 bg-slate-100 text-whit text-gray-900 rounded-lg shadow-lg">
       <h1 className="text-3xl font-bold mb-6 text-center">Create Blog Post</h1>
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="mb-4">
@@ -79,7 +79,7 @@ const CreateBlogPost = () => {
             type="text"
             value={title}
             onChange={handleTitleChange}
-            className="w-full border border-gray-600 rounded-md py-2 px-4 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border border-gray-600 rounded-md py-2 px-4 bg-slate-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
         </div>
@@ -88,7 +88,7 @@ const CreateBlogPost = () => {
           <textarea
             value={description}
             onChange={handleDescriptionChange}
-            className="w-full border border-gray-600 rounded-md py-2 px-4 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border border-gray-600 rounded-md py-2 px-4 bg-slate-100 text-gray-700 ocus:outline-none focus:ring-2 focus:ring-blue-500"
             required
             rows="5"
           />
@@ -100,13 +100,13 @@ const CreateBlogPost = () => {
             accept="image/*"
             id="uploader"
             onChange={handlePhotoChange}
-            className="w-full border border-gray-600 rounded-md py-2 px-4 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border border-gray-600 rounded-md py-2 px-4 bg-slate-100 text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
         </div>
         <button
           type="submit"
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          className="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         >
           Submit
         </button>

@@ -38,14 +38,14 @@ const FeaturedSection = () => {
         navigate(`/blog/${id}`);
     };
 
-    const data = [
-        {
-          id: 1,
-          imageUrl: feat3,
-          title: 'Future of Web Development in 2024',
-          description: 'As we step into 2024, the landscape of web development continues to evolve at a rapid pace, driven by technological advancements, changing user expectations, and emerging trends. In this blog, we will explore what the future holds for web development in 2024 and beyond.',
-        },
-      ];
+    // const data = [
+    //     {
+    //       id: 1,
+    //       imageUrl: feat3,
+    //       title: 'Future of Web Development in 2024',
+    //       description: 'As we step into 2024, the landscape of web development continues to evolve at a rapid pace, driven by technological advancements, changing user expectations, and emerging trends. In this blog, we will explore what the future holds for web development in 2024 and beyond.',
+    //     },
+    //   ];
 
 
   return (
@@ -53,9 +53,9 @@ const FeaturedSection = () => {
     <div className='flex justify-center content-center text-4xl font-extrabold mb-6'>Featured Blog</div>
     <div className="container">
       {blogs.map(blog=> (
-        <div key={blog.$id} onClick={() => handleBlogClick(blog.$id)} className="image-container rounded-xl overflow-hidden flex justify-center content-center">
-          <img src={blog.photo} alt={blog.title} className="w-2/3 h-auto rounded-lg" />
-          <div className="text-box absolute bg-white bottom-4 left-4/12 w-4/12 p-4 rounded-xl shadow-md transition duration-300 ease-in-out">
+        <div key={blog.$id}  className="image-container rounded-xl overflow-hidden flex justify-center content-center">
+          <img src={blog.photo} alt={blog.title} className="w-2/3 h-auto rounded-lg" onClick={() => handleBlogClick(blog.$id)} />
+          <div className="text-box absolute bg-white bottom-4 left-4/12 w-4/12 p-4 rounded-xl shadow-md transition duration-300 ease-in-out" onClick={() => handleBlogClick(blog.$id)}>
             <h2 className="text-lg font-semibold">{blog.title}</h2>
             <p className="text-sm mt-2 overflow-hidden" style={{ maxHeight: '3em', textOverflow: 'ellipsis', whiteSpace: 'normal', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical' }}>
               {blog.body}

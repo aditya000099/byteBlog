@@ -6,6 +6,7 @@ import SubscribeSection from '../components/subscribe';
 import Footer from '../components/footer';
 import Blogs from '../components/homeblogs';
 import News from './newspage';
+import SearchBar from '../components/searchbar';
 
 const HomePage = () => {
   return (
@@ -13,6 +14,7 @@ const HomePage = () => {
     {/* <div className="pt-[4.75rem] lg:pt-[5.25rem] overflow-hidden"> */}
     <div className="overflow-hidden" >
       <Header />
+      {/* <SearchBar /> */}
       <FeaturedSection/>
       <Category/>
       <Blogs />
