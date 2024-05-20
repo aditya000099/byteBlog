@@ -2,9 +2,12 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import.meta.env.VITE_APP_API_URL_NEWS_API;
 
 const News = () => {
   const [news, setNews] = useState([]);
+
+//   const NEWS_API = process.env.VITE_APP_API_URL_NEWS_API;
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -14,7 +17,8 @@ const News = () => {
             category: 'technology',
             language: 'en',
             country: 'us',
-            apiKey: '6149c75ae5f845829086f89423b8c2ae', // Replace with your NewsAPI key
+            // apiKey: '6149c75ae5f845829086f89423b8c2ae', // Replace with your NewsAPI key
+            apiKey: import.meta.env.VITE_APP_API_URL_NEWS_API, // Replace with your NewsAPI key
             pageSize: 10
           }
         });
