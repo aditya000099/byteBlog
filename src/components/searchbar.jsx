@@ -20,8 +20,9 @@ const SearchBar = () => {
         try {
             const response = await databases.listDocuments('database', 'blogs');
             const filtered = response.documents.filter(blog =>
-                blog.title.toLowerCase().includes(query.toLowerCase()) ||
-                blog.body.toLowerCase().includes(query.toLowerCase())
+                blog.title.toLowerCase().includes(query.toLowerCase())
+                //  ||
+                // blog.body.toLowerCase().includes(query.toLowerCase())
             );
             setResults(filtered);
         } catch (error) {
