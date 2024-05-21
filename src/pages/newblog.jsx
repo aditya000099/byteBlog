@@ -108,7 +108,7 @@ const CreateBlogPost = () => {
             onChange={handleCategoryChange}
             className="w-full border border-gray-600 rounded-md py-2 px-4 bg-slate-100 text-gray-700 ocus:outline-none focus:ring-2 focus:ring-blue-500"
             required
-            rows="5"
+            rows="1"
           />
         </div>
         <div className="mb-4">
@@ -119,7 +119,7 @@ const CreateBlogPost = () => {
             id="uploader"
             onChange={handlePhotoChange}
             className="w-full border border-gray-600 rounded-md py-2 px-4 bg-slate-100 text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
+            // required
           />
         </div>
         <button
