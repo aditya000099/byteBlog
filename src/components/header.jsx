@@ -86,7 +86,7 @@ const Header = () => {
             <FontAwesomeIcon
               icon={faPenToSquare}
               size="lg"
-              className="cursor-pointer p-2 text-gray-500 fa-fw fa-inverse"
+              className="cursor-pointer p-2 text-gray-800 fa-fw fa-inverse"
             />
           </Link>
         ) : (
@@ -97,7 +97,7 @@ const Header = () => {
         <FontAwesomeIcon
           icon={faBell}
           size="lg"
-          className="cursor-pointer p-2 text-gray-500 fa-fw fa-inverse"
+          className="cursor-pointer p-2 text-gray-800 fa-fw fa-inverse"
         />
 
         {/* Profile page icon */}
