@@ -13,6 +13,7 @@ const storage = new Storage(client);
 const CreateBlogPost = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [tagone, setTagone] = useState("");
   const [photo, setPhoto] = useState(null);
 
   const handleTitleChange = (e) => {
@@ -21,6 +22,10 @@ const CreateBlogPost = () => {
 
   const handleDescriptionChange = (e) => {
     setDescription(e.target.value);
+  };
+
+  const handleCategoryChange = (e) => {
+    setTagone(e.target.value);
   };
 
   const handlePhotoChange = async (e) => {
@@ -61,7 +66,7 @@ const CreateBlogPost = () => {
         "database",
         "blogs",
         ID.unique(),
-        { title: title, body: description, photo: photoId }
+        { title: title, body: description, photo: photoId, tagone: tagone }
       );
 
       console.log("Blog post created:", post);
@@ -91,6 +96,16 @@ const CreateBlogPost = () => {
           <textarea
             value={description}
             onChange={handleDescriptionChange}
+            className="w-full border border-gray-600 rounded-md py-2 px-4 bg-slate-100 text-gray-700 ocus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+            rows="5"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block mb-2 text-lg font-medium">Category:</label>
+          <textarea
+            value={tagone}
+            onChange={handleCategoryChange}
             className="w-full border border-gray-600 rounded-md py-2 px-4 bg-slate-100 text-gray-700 ocus:outline-none focus:ring-2 focus:ring-blue-500"
             required
             rows="5"
