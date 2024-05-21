@@ -72,7 +72,7 @@ const News = () => {
       try {
         const response = await axios.get('https://saurav.tech/NewsAPI/top-headlines/category/technology/us.json'
           );
-          setNews(response.data.articles.slice(0, 9));
+          setNews(response.data.articles.slice(0, 12));
       } catch (error) {
         console.error('Error fetching news:', error);
       }
