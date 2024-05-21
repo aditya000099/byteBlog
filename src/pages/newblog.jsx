@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Client, Databases, ID, Storage } from "appwrite";
 import Header from "../components/header";
 
@@ -7,7 +8,6 @@ const client = new Client()
   .setProject("6643380c00076d57eba2");
 
 const databases = new Databases(client);
-
 const storage = new Storage(client);
 
 const CreateBlogPost = () => {
@@ -15,6 +15,8 @@ const CreateBlogPost = () => {
   const [description, setDescription] = useState("");
   const [tagone, setTagone] = useState("");
   const [photo, setPhoto] = useState(null);
+  const [confirmationMessage, setConfirmationMessage] = useState(""); // State for confirmation message
+  const navigate = useNavigate();
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
@@ -43,11 +45,10 @@ const CreateBlogPost = () => {
       console.log('Photo uploaded:', photoResponse);
   
       // Assuming photoResponse contains the file ID
-      const photoId = photoResponse.$url;// Extract the file ID from the response
+      const photoId = photoResponse.$url; // Extract the file URL from the response
   
-      // Return the file ID as a string
       console.log(photoId);
-      return photoId; // Convert the file ID to a string
+      return photoId;
     } catch (error) {
       console.error('Error uploading photo:', error);
       return ''; // Return an empty string or handle the error as needed
@@ -59,7 +60,7 @@ const CreateBlogPost = () => {
     e.preventDefault();
 
     try {
-      // Get the photo ID from handlePhotoChange function
+      // Get the photo URL from handlePhotoChange function
       const photoId = await handlePhotoChange(e);
 
       const post = await databases.createDocument(
@@ -69,7 +70,15 @@ const CreateBlogPost = () => {
         { title: title, body: description, photo: photoId, tagone: tagone }
       );
 
+      alert("Blog post created!");
+
       console.log("Blog post created:", post);
+      setConfirmationMessage("Blog post created successfully!"); // Set confirmation message
+
+      // Redirect to dashboard after a short delay
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 2000);
     } catch (error) {
       console.error("Error creating blog post:", error);
     }
@@ -77,62 +86,65 @@ const CreateBlogPost = () => {
 
   return (
     <>
-    <Header />
-    <div className="max-w-xl mx-auto px-4 py-8 bg-slate-100  text-gray-900 rounded-lg  mt-20">
-      <h1 className="text-3xl font-bold mb-6 text-center">Create Blog Post</h1>
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="mb-4">
-          <label className="block mb-2 text-lg font-medium">Title:</label>
-          <input
-            type="text"
-            value={title}
-            onChange={handleTitleChange}
-            className="w-full border border-gray-600 rounded-md py-2 px-4 bg-slate-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block mb-2 text-lg font-medium">Description:</label>
-          <textarea
-            value={description}
-            onChange={handleDescriptionChange}
-            className="w-full border border-gray-600 rounded-md py-2 px-4 bg-slate-100 text-gray-700 ocus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-            rows="5"
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block mb-2 text-lg font-medium">Category:</label>
-          <textarea
-            value={tagone}
-            onChange={handleCategoryChange}
-            className="w-full border border-gray-600 rounded-md py-2 px-4 bg-slate-100 text-gray-700 ocus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-            rows="1"
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block mb-2 text-lg font-medium">Photo:</label>
-          <input
-            type="file"
-            accept="image/*"
-            id="uploader"
-            onChange={handlePhotoChange}
-            className="w-full border border-gray-600 rounded-md py-2 px-4 bg-slate-100 text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            // required
-          />
-        </div>
-        <button
-          type="submit"
-          className="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-        >
-          Submit
-        </button>
-      </form>
-    </div>
+      <Header />
+      <div className="max-w-xl mx-auto px-4 py-8 bg-slate-100 text-gray-900 rounded-lg mt-20">
+        <h1 className="text-3xl font-bold mb-6 text-center">Create Blog Post</h1>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="mb-4">
+            <label className="block mb-2 text-lg font-medium">Title:</label>
+            <input
+              type="text"
+              value={title}
+              onChange={handleTitleChange}
+              className="w-full border border-gray-600 rounded-md py-2 px-4 bg-slate-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block mb-2 text-lg font-medium">Description:</label>
+            <textarea
+              value={description}
+              onChange={handleDescriptionChange}
+              className="w-full border border-gray-600 rounded-md py-2 px-4 bg-slate-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+              rows="5"
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block mb-2 text-lg font-medium">Category:</label>
+            <textarea
+              value={tagone}
+              onChange={handleCategoryChange}
+              className="w-full border border-gray-600 rounded-md py-2 px-4 bg-slate-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+              rows="1"
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block mb-2 text-lg font-medium">Photo:</label>
+            <input
+              type="file"
+              accept="image/*"
+              id="uploader"
+              onChange={handlePhotoChange}
+              className="w-full border border-gray-600 rounded-md py-2 px-4 bg-slate-100 text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+          <button
+            type="submit"
+            className="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          >
+            Submit
+          </button>
+        </form>
+        {confirmationMessage && (
+          <div className="mt-4 p-4 bg-green-100 text-green-800 rounded">
+            {confirmationMessage}
+          </div>
+        )}
+      </div>
     </>
   );
-
 };
 
 export default CreateBlogPost;
