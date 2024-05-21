@@ -50,7 +50,7 @@ const logos = [
       <div
         key={index}
         onClick={() => handleBlogClick(item.name)}
-        className='w-48 p-4 bg-white shadow-md rounded-md text-center transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer flex flex-col justify-center items-center h-52 hover:bg-purple-600 hover:text-white'
+        className='w-48 p-4 bg-white shadow-md rounded-md text-center transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer flex flex-col justify-center items-center h-52 hover:bg-slate-100 hover:text-gray-900'
       >
         <img src={item.imageSrc} alt={item.name} className='w-12 h-12 mb-2' /> {/* Use local image */}
         <span>{item.name}</span>

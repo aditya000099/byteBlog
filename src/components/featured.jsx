@@ -49,8 +49,9 @@ const FeaturedSection = () => {
 
 
   return (
-    <div className="mt-6 relative height-auto">
-    <div className='flex justify-center content-center text-4xl font-extrabold mb-6'>Featured Blog</div>
+    <div className="mt-28 relative height-auto">
+    {/* <div className='flex justify-center content-center text-4xl font-extrabold mb-6'>Featured Blog</div> */}
+    <h1 className="text-5xl font-extrabold mb-10 text-center text-gray-900">byteBlog Featured</h1>
     <div className="container">
       {blogs.map(blog=> (
         <div key={blog.$id}  className="image-container rounded-xl overflow-hidden flex justify-center content-center">

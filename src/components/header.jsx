@@ -23,7 +23,7 @@ const Header = () => {
   };
 
   return (
-    <div className="text-white py-2 px-4 flex justify-between items-center shadow-md bg-white">
+    <div className="fixed top-0 left-0 w-full text-white py-2 px-4 flex justify-between items-center shadow-md bg-white z-50">
       {/* Logo on the left */}
       <img src={logoImage} alt="Logo" className="h-12 rounded-full" />
 

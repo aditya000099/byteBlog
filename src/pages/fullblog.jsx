@@ -5,6 +5,10 @@ import sampleImage from '../../public/cursor.png';
  // Replace with the path to your static image
  import { Client, Databases, ID, Storage, Account } from "appwrite";
 import Header from '../components/header';
+import writerImage from '../../public/pp.png';
+import Blogs from '../components/homeblogs';
+import RelatedBlogs from '../components/relatedblogs';
+import Footer from '../components/footer';
 
  const client = new Client()
    .setEndpoint("https://cloud.appwrite.io/v1")
@@ -15,6 +19,13 @@ import Header from '../components/header';
  const storage = new Storage(client);
  
  const account = new Account(client);
+
+ const calculateReadingTime = (text) => {
+  const wordsPerMinute = 200; // Average reading speed
+  const words = text.split(/\s+/).length; // Split by whitespace and count words
+  const minutes = Math.ceil(words / wordsPerMinute);
+  return minutes;
+};
 
 const BlogDetail = () => {
     const { id } = useParams();
@@ -39,14 +50,30 @@ const BlogDetail = () => {
 
     return (
         <>
-        <Header />
-        <div className="w-full mx-auto px-20 py-8 bg-slate-100 text-white rounded-lg shadow-lg mt-1">
-            <img src={blog.photo ? blog.photo : sampleImage} alt="Blog" className="mt-8 w-full px-40 object-cover mb-4 rounded-3xl" />
-            <h1 className="text-4xl font-bold mb-4 text-center text-gray-900">{blog.title}</h1>
-            <div className="text-xl text-gray-800 whitespace-pre-wrap">{blog.body}</div>
+      <Header />
+      <div className="w-full max-w-5xl mx-auto px-4 py-8 bg-slate-100 text-white rounded-sm shadow-lg mt-12">
+        <img src={blog.photo ? blog.photo : sampleImage} alt="Blog" className="w-full h-auto object-cover rounded-3xl mb-4" />
+        <h1 className="text-5xl font-bold mb-8 mt-14 text-center text-gray-900">{blog.title}</h1>
+        
+        <div className="flex items-center justify-start mb-8 mt-14">
+          <img src={writerImage} alt="Writer" className="w-12 h-12 rounded-full mr-4" />
+          <div className="flex-grow">
+            <hr className="border-gray-300 mb-2" />
+            <h2 className="text-xl  text-left text-gray-900">Anonymous Writer</h2>
+            <hr className="border-gray-300 mt-2" />
+          </div>
         </div>
-        </>
+        
+        <div className="text-xl text-gray-800 whitespace-pre-wrap">{blog.body}</div>
+      </div>
+      <h1 className="text-3xl font-bold mb-2 mt-20 text-center text-gray-900">Related Articles</h1>
+      <RelatedBlogs />
+      <div className="mt-16">
+      </div>
+      <Footer />
+    </>
     );
+    
 };
 
 export default BlogDetail;

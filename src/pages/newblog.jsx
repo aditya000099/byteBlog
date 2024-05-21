@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Client, Databases, ID, Storage } from "appwrite";
+import Header from "../components/header";
 
 const client = new Client()
   .setEndpoint("https://cloud.appwrite.io/v1")
@@ -70,7 +71,9 @@ const CreateBlogPost = () => {
   };
 
   return (
-    <div className="max-w-xl mx-auto px-4 py-8 bg-slate-100 text-whit text-gray-900 rounded-lg shadow-lg">
+    <>
+    <Header />
+    <div className="max-w-xl mx-auto px-4 py-8 bg-slate-100  text-gray-900 rounded-lg  mt-20">
       <h1 className="text-3xl font-bold mb-6 text-center">Create Blog Post</h1>
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="mb-4">
@@ -112,6 +115,7 @@ const CreateBlogPost = () => {
         </button>
       </form>
     </div>
+    </>
   );
 
 };

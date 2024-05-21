@@ -33,7 +33,7 @@ const SearchBar = () => {
         <>
             {isSearching && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-                    <div className="bg-white bg-opacity-10 backdrop-blur-md rounded-lg p-4 max-w-2xl w-full">
+                    <div className="bg-white bg-opacity-10 backdrop-blur-md rounded-lg p-4 max-w-2xl w-full relative">
                         <form onSubmit={handleSearch} className="relative">
                             <input
                                 type="text"
@@ -79,26 +79,46 @@ const SearchBar = () => {
                             </svg>
                         </button>
                         <div className="mt-4">
-                            {results.map((blog) => (
-                                <div key={blog.$id} className="bg-slate-100 text-white rounded-lg shadow-lg overflow-hidden mb-4">
-                                    <img src={blog.photo ? blog.photo : sampleImage} alt="Blog" className="w-full h-48 object-cover" />
-                                    <div className="p-4">
-                                        <h2 className="text-2xl font-bold mb-2 text-gray-900">{blog.title}</h2>
-                                        <p className="text-gray-800">
-                                            {blog.body.length > 150 ? blog.body.substring(0, 130) + '...' : blog.body}
-                                        </p>
+                            {results.length === 0 ? (
+                                <p className="text-center text-gray-900">No blogs found.</p>
+                            ) : (
+                                results.map((blog) => (
+                                    <div
+                                        key={blog.$id}
+                                        className="bg-slate-100 text-white rounded-lg shadow-lg overflow-hidden mb-4"
+                                    >
+                                        <img src={blog.photo ? blog.photo : sampleImage} alt="Blog" className="w-full h-48 object-cover rounded-t-lg" />
+                                        <div className="p-4">
+                                            <h2 className="text-2xl font-bold mb-2 text-gray-900">{blog.title}</h2>
+                                            <p className="text-gray-800">
+                                                {blog.body.length > 150 ? blog.body.substring(0, 130) + '...' : blog.body}
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
+                                ))
+                            )}
                         </div>
                     </div>
                 </div>
             )}
             <button
                 onClick={() => setIsSearching(true)}
-                className="p-2 bg-blue-500 text-white rounded-md focus:outline-none"
+                className="p-2 bg-transparent text-gray-800 rounded-full focus:outline-none"
             >
-                Search
+                <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                    />
+                </svg>
             </button>
         </>
     );
