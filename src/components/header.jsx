@@ -45,7 +45,7 @@ const Header = () => {
         </Link>
 
         {/* Get Pro link */}
-        <Link to="/pro" className="cursor-pointer text-gray-900">
+        <Link to="/signup" className="cursor-pointer text-gray-900">
           Get Pro!
         </Link>
       </div>
@@ -70,11 +70,13 @@ const Header = () => {
         />
 
         {/* Profile page icon */}
+        <Link to="/login" className="cursor-pointer text-gray-900">
         <FontAwesomeIcon
           icon={faUserCircle}
           size="lg"
           className="cursor-pointer rounded-full bg-gray-200 text-gray-800 p-2"
         />
+        </Link>
       </div>
     </div>
   );
