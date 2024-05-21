@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Client, Databases, ID, Storage, Account } from "appwrite";
+import Header from '../components/header';
 
 const client = new Client()
   .setEndpoint("https://cloud.appwrite.io/v1")
@@ -38,8 +39,10 @@ const Signup = () => {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white">
-            <div className="bg-gray-800 p-8 rounded-lg shadow-lg w-80">
+        <>
+        <Header /> 
+        <div className="flex items-center justify-center min-h-screen bg-slate-100 text-gray-800">
+            <div className="bg-slate-100 p-8 rounded-lg shadow-lg w-80">
                 <h2 className="text-2xl font-bold mb-4 text-center">Signup</h2>
                 <form onSubmit={handleSignup}>
                     <div className="mb-4">
@@ -51,7 +54,7 @@ const Signup = () => {
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                             required
-                            className="w-full px-3 py-2 bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-3 py-2 bg-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
                     <div className="mb-4">
@@ -63,7 +66,7 @@ const Signup = () => {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
-                            className="w-full px-3 py-2 bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-3 py-2 bg-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
                     <div className="mb-6">
@@ -75,7 +78,7 @@ const Signup = () => {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
-                            className="w-full px-3 py-2 bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-3 py-2 bg-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
                     <button
@@ -87,6 +90,7 @@ const Signup = () => {
                 </form>
             </div>
         </div>
+        </>
     );
 };
 
