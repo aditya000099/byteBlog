@@ -112,8 +112,8 @@ const FeaturedSection = () => {
             )
           )}
         </div>
-        <div className="w-full lg:w-1/3">
-        <h1 className="text-2xl font-bold mb-10 text-center text-gray-900 mt-4">
+        <div className="w-full lg:w-1/3 hidden lg:block">
+        <h1 className="text-2xl font-bold mb-10 text-center text-gray-900 mt-2">
         Most Viewed
       </h1>
           {loading2 ? (

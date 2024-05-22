@@ -207,7 +207,7 @@ const BlogDetail = () => {
   return (
     <>
       <Header />
-      <div className="w-full max-w-5xl mx-auto px-4 py-8 bg-slate-100 text-white rounded-sm shadow-lg mt-12">
+      <div className="w-full max-w-5xl mx-auto px-4 py-8 bg-slate-100 text-white rounded-lg  mt-12">
         <img src={blog.photo ? blog.photo : sampleImage} alt="Blog" className="w-full h-auto object-cover rounded-3xl mb-4" />
         <h1 className="text-5xl font-bold mb-8 mt-14 text-center text-gray-900">{blog.title}</h1>
 
