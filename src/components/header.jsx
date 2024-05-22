@@ -90,8 +90,16 @@ const Header = () => {
             />
           </Link>
         ) : (
-          <span className="text-gray-500">Login to create</span>
+          <Link to="/oops">
+            <FontAwesomeIcon
+              icon={faPenToSquare}
+              size="lg"
+              className="cursor-pointer p-2 text-gray-800 fa-fw fa-inverse"
+            />
+          </Link>
+        
         )}
+          {/* <span className="text-gray-500">Login to create</span> */}
 
         {/* Notifications icon with outline and grey color */}
         <FontAwesomeIcon
@@ -101,13 +109,25 @@ const Header = () => {
         />
 
         {/* Profile page icon */}
-        <Link to="/login" className="cursor-pointer text-gray-900">
+        {isLoggedIn ? (
+          <Link to="/account" className="cursor-pointer text-gray-900">
           <FontAwesomeIcon
             icon={faUserCircle}
             size="lg"
             className="cursor-pointer rounded-full bg-gray-200 text-gray-800 p-2"
           />
         </Link>
+        ) : (
+          <Link to="/login">
+            <FontAwesomeIcon
+              icon={faUserCircle}
+              size="lg"
+              className="cursor-pointer p-2 text-gray-800 fa-fw fa-inverse"
+            />
+          </Link>
+        
+        )}
+        
       </div>
     </div>
   );

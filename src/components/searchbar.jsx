@@ -41,9 +41,9 @@ const SearchBar = () => {
                                 placeholder="Search blogs..."
                                 value={query}
                                 onChange={(e) => setQuery(e.target.value)}
-                                className="w-full p-2 rounded-md bg-white bg-opacity-70 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                className="w-full p-2 rounded-md mt-4 bg-white bg-opacity-70 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             />
-                            <button type="submit" className="absolute right-0 top-0 mt-2 mr-2">
+                            <button type="submit" className="absolute right-0 top-0 mt-6 mr-2">
                                 <svg
                                     className="w-6 h-6 text-gray-500"
                                     fill="none"
@@ -62,7 +62,7 @@ const SearchBar = () => {
                         </form>
                         <button 
                             onClick={() => setIsSearching(false)}
-                            className="absolute top-0 right-0 mt-2 mr-2 text-gray-500 hover:text-gray-700"
+                            className="absolute top-0 right-0 mt-1 mr-2 text-gray-500 hover:text-gray-700"
                         >
                             <svg
                                 className="w-6 h-6"
@@ -79,26 +79,29 @@ const SearchBar = () => {
                                 />
                             </svg>
                         </button>
-                        <div className="mt-4">
-                            {results.length === 0 ? (
-                                <p className="text-center text-gray-900">No blogs found.</p>
-                            ) : (
-                                results.map((blog) => (
-                                    <div
-                                        key={blog.$id}
-                                        className="bg-slate-100 text-white rounded-lg shadow-lg overflow-hidden mb-4"
-                                    >
-                                        <img src={blog.photo ? blog.photo : sampleImage} alt="Blog" className="w-full h-48 object-cover rounded-t-lg" />
-                                        <div className="p-4">
-                                            <h2 className="text-2xl font-bold mb-2 text-gray-900">{blog.title}</h2>
-                                            <p className="text-gray-800">
-                                                {blog.body.length > 150 ? blog.body.substring(0, 130) + '...' : blog.body}
-                                            </p>
+                        {/* Scrollable container for search results */}
+                        {query && (
+                            <div className="mt-4 max-h-96 overflow-y-auto p-16">
+                                {results.length === 0 ? (
+                                    <p className="text-center text-gray-900">No blogs found.</p>
+                                ) : (
+                                    results.map((blog) => (
+                                        <div
+                                            key={blog.$id}
+                                            className="bg-slate-100 text-white rounded-lg shadow-lg overflow-hidden mb-4"
+                                        >
+                                            <img src={blog.photo ? blog.photo : sampleImage} alt="Blog" className="w-full h-48 object-cover rounded-t-lg" />
+                                            <div className="p-4">
+                                                <h2 className="text-2xl font-bold mb-2 text-gray-900">{blog.title}</h2>
+                                                <p className="text-gray-800">
+                                                    {blog.body.length > 150 ? blog.body.substring(0, 130) + '...' : blog.body}
+                                                </p>
+                                            </div>
                                         </div>
-                                    </div>
-                                ))
-                            )}
-                        </div>
+                                    ))
+                                )}
+                            </div>
+                        )}
                     </div>
                 </div>
             )}
@@ -123,6 +126,7 @@ const SearchBar = () => {
             </button>
         </>
     );
+    
 };
 
 export default SearchBar;

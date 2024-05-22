@@ -10,6 +10,11 @@ import Signup from "./pages/signup";
 import BlogDetail from "./pages/fullblog";
 import CategoryBlogs from "./pages/categoryBlogs";
 import PricingPage from "./pages/pricing";
+import TipTapEditor from "./pages/tiptapeditor";
+import NoUser from "./pages/nologin";
+import UserAccount from "./pages/useraccount";
+// import Tiptapeditor from "./pages/tiptapeditor";
+// import CreateBlogPosts from "./pages/newblogs";
 
 // import cursor from '../public/cursor.png';
 
@@ -39,6 +44,10 @@ const App = () => {
         <Routes>
           <Route exact path="/" element={<HomePage />} />
           <Route exact path="/new" element={<CreateBlogPost />} />
+          <Route exact path="/oops" element={<NoUser />} />
+          <Route exact path="/account" element={<UserAccount />} />
+          {/* <Route exact path="/new" element={<TipTapEditor />} /> */}
+          {/* <Route exact path="/newb" element={<CreateBlogPosts />} /> */}
           <Route exact path="/login" element={<Login/>} />
           <Route exact path="/signup" element={<Signup/>} />
           <Route exact path="/dashboard" element={<HomePage/>} />

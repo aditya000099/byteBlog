@@ -24,7 +24,7 @@ const Signup = () => {
                 const post = databases.createDocument(
                     "database",
                     "users",
-                    ID.unique(),
+                    response.$id,
                     { name: name, email: email, id: response.$id}
                   );
             

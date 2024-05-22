@@ -64,7 +64,7 @@ const BlogDetail = () => {
           </div>
         </div>
         
-        <div className="text-xl text-gray-800 whitespace-pre-wrap">{blog.body}</div>
+        <div className="text-xl text-gray-800 whitespace-pre-wrap" dangerouslySetInnerHTML={{ __html: blog.body}}></div>
       </div>
       <h1 className="text-3xl font-bold mb-2 mt-20 text-center text-gray-900">Related Articles</h1>
       <RelatedBlogs />
