@@ -70,7 +70,7 @@ const PricingPage = () => {
             </ul>
           </div>
           <div className="bg-slate-100 px-6 py-4">
-            <button className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+            <button className="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
               Sign Up
             </button>
           </div>

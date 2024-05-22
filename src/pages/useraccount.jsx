@@ -193,6 +193,9 @@ import { Client, Account, Databases, Query } from "appwrite"; // Import Appwrite
 import Header from "../components/header";
 import './accountpage.css';
 
+import { Bar } from 'react-chartjs-2';
+import Chart from 'chart.js/auto';
+
 const client = new Client()
   .setEndpoint("https://cloud.appwrite.io/v1")
   .setProject("6643380c00076d57eba2");
@@ -207,19 +210,19 @@ const databases = new Databases(client);
 
 const Loader = () => (
   <div className="fixed inset-0 bg-opacity-80 bg-slate-50 flex justify-center items-center z-50">
-  <div class="spinner center">
-    <div class="spinner-blade"></div>
-    <div class="spinner-blade"></div>
-    <div class="spinner-blade"></div>
-    <div class="spinner-blade"></div>
-    <div class="spinner-blade"></div>
-    <div class="spinner-blade"></div>
-    <div class="spinner-blade"></div>
-    <div class="spinner-blade"></div>
-    <div class="spinner-blade"></div>
-    <div class="spinner-blade"></div>
-    <div class="spinner-blade"></div>
-    <div class="spinner-blade"></div>
+  <div className="spinner center">
+    <div className="spinner-blade"></div>
+    <div className="spinner-blade"></div>
+    <div className="spinner-blade"></div>
+    <div className="spinner-blade"></div>
+    <div className="spinner-blade"></div>
+    <div className="spinner-blade"></div>
+    <div className="spinner-blade"></div>
+    <div className="spinner-blade"></div>
+    <div className="spinner-blade"></div>
+    <div className="spinner-blade"></div>
+    <div className="spinner-blade"></div>
+    <div className="spinner-blade"></div>
 </div>
     {/* <div className="animate-spin rounded-full h-20 w-20 border-t-2 border-b-2 border-gray-100"></div> */}
   </div>
@@ -234,6 +237,8 @@ const UserAccount = () => {
   const [userBlogs, setUserBlogs] = useState([]);
   const [isLoading, setIsLoading] = useState(true); // State to manage loading state
   //   const [isLoggedIn, setIsLoggedIn] = useState(false); // State to manage user login status
+
+  const [totalViews, setTotalViews] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -272,6 +277,7 @@ const UserAccount = () => {
           Query.equal("author", userId),
         ]);
         setUserBlogs(response.documents);
+        calculateTotalViews(response.documents);
       } catch (error) {
         console.error("Failed to fetch user blogs", error);
       } finally {
@@ -279,8 +285,36 @@ const UserAccount = () => {
       }
     };
 
+    const calculateTotalViews = (blogs) => {
+        const total = blogs.reduce((acc, blog) => acc + blog.views, 0);
+        setTotalViews(total);
+
+        
+      };
+
     checkAuthStatus();
   }, [navigate]);
+
+//   const data = {
+//     labels: blogs.map((blog) => blog.title),
+//     datasets: [
+//       {
+//         label: 'Views',
+//         data: blogs.map((blog) => blog.views),
+//         backgroundColor: 'rgba(0, 0, 0, 0.7)',
+//         borderColor: 'rgba(0, 0, 0, 1)',
+//         borderWidth: 1,
+//       },
+//     ],
+//   };
+
+//   const options = {
+//     scales: {
+//       y: {
+//         beginAtZero: true,
+//       },
+//     },
+//   };
 
   const handleBlogClick = (id) => {
     navigate(`/blog/${id}`);
@@ -339,8 +373,17 @@ const UserAccount = () => {
       <h2 className="text-3xl font-bold text-gray-800 mb-2 mt-6 text-center">
         Your Blogs
       </h2>
+      <h2 className="text-3xl font-bold text-gray-800 mb-2 mt-6 text-center">
+       {totalViews} views
+      </h2>
 
-      // <div className="mt-8 flex justify-center items-center w-full">
+      {/* {blogs.length > 0 && ( */}
+          {/* <div className="mt-12">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">Total Views: {totalViews}</h2>
+            <Bar data={data} options={options} />
+          </div> */}
+        {/* )} */}
+       <div className="mt-8 flex justify-center items-center w-full">
    <div className="flex flex-wrap justify-center">
      {userBlogs.map((blog) => (
        <div

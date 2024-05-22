@@ -105,6 +105,9 @@ const BlogDetail = () => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true); // Loading state for blog
+  const [commentsLoading, setCommentsLoading] = useState(true); // Loading state for comments
+  const [rt, setRt] = useState("2");
 
   useEffect(() => {
     const fetchBlog = async () => {
@@ -113,6 +116,8 @@ const BlogDetail = () => {
         setBlog(response);
       } catch (error) {
         console.error('Failed to fetch blog', error);
+      } finally {
+        setLoading(false); // Set loading to false after fetching blog
       }
     };
 
@@ -124,6 +129,8 @@ const BlogDetail = () => {
         setComments(response.documents);
       } catch (error) {
         console.error('Failed to fetch comments', error);
+      } finally {
+        setCommentsLoading(false); // Set loading to false after fetching comments
       }
     };
 
@@ -160,8 +167,41 @@ const BlogDetail = () => {
     }
   };
 
-  if (!blog) {
-    return <div className="text-white">Loading...</div>;
+  // Skeleton component for blog details
+  const BlogSkeleton = () => (
+    <div className="w-full max-w-5xl mx-auto px-4 py-8 bg-slate-100 text-white rounded-sm shadow-lg mt-12">
+      <div className="w-full h-3/4 bg-gray-300 animate-pulse rounded-3xl mb-4"></div>
+      <div className="h-10 bg-gray-300 animate-pulse rounded w-3/4 mx-auto mb-8"></div>
+      <div className="flex items-center justify-start mb-8 mt-14">
+        <div className="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+        <div className="flex-grow">
+          <hr className="border-gray-300 mb-2" />
+          <div className="h-6 bg-gray-300 animate-pulse rounded w-1/2 mb-2"></div>
+          <div className="h-4 bg-gray-300 animate-pulse rounded w-1/4 mt-2"></div>
+          <hr className="border-gray-300 mt-2" />
+        </div>
+      </div>
+      <div className="h-24 bg-gray-300 animate-pulse rounded mb-4"></div>
+      <div className="h-24 bg-gray-300 animate-pulse rounded mb-4"></div>
+      <div className="h-24 bg-gray-300 animate-pulse rounded mb-4"></div>
+    </div>
+  );
+
+  // Skeleton component for comments
+  const CommentSkeleton = () => (
+    <div className="bg-white p-4 rounded-lg shadow-lg mb-4">
+      <div className="flex items-center mb-2">
+        <div className="w-8 h-8 bg-gray-300 rounded-full mr-2"></div>
+        <div className="h-4 bg-gray-300 animate-pulse rounded w-1/4"></div>
+      </div>
+      <div className="h-4 bg-gray-300 animate-pulse rounded w-full"></div>
+      <div className="h-4 bg-gray-300 animate-pulse rounded w-full mt-2"></div>
+      <div className="h-4 bg-gray-300 animate-pulse rounded w-full mt-2"></div>
+    </div>
+  );
+
+  if (loading) {
+    return <BlogSkeleton />;
   }
 
   return (
@@ -176,6 +216,7 @@ const BlogDetail = () => {
           <div className="flex-grow">
             <hr className="border-gray-300 mb-2" />
             <h2 className="text-xl text-left text-gray-900">Anonymous Writer</h2>
+            <h2 className="text-base text-left text-gray-700 mt-2">Estimated reading time: {rt} min</h2>
             <hr className="border-gray-300 mt-2" />
           </div>
         </div>
@@ -200,19 +241,15 @@ const BlogDetail = () => {
               </button>
             </form>
           ) : (
-            <div className="flex flex-col items-center justify-center bg-gray-100 p-6 rounded-lg shadow-lg mb-6">
+            <div className="flex flex-col items-center justify-center bg-slate-200 p-6 rounded-lg  mb-6">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={2}
-                stroke="currentColor"
                 className="w-12 h-12 text-gray-400 mb-4"
+                viewBox="0 0 448 512"
               >
                 <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 11V3m0 0a9 9 0 000 18v-6m0 6a9 9 0 010-18m-9 9h18"
+                  fill="#a3a3a3"
+                  d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z"
                 />
               </svg>
               <p className="text-gray-600 mb-4">Login to add a comment</p>
@@ -225,15 +262,19 @@ const BlogDetail = () => {
             </div>
           )}
           <div className="space-y-4">
-            {comments.map((comment) => (
-              <div key={comment.$id} className="bg-white p-4 rounded-lg shadow-lg">
-                <div className="flex items-center mb-2">
-                  <img src={writerImage} alt="User" className="w-8 h-8 rounded-full mr-2" />
-                  <span className="text-gray-900 font-semibold">{comment.name}</span>
-                </div>
-                <p className="text-gray-800">{comment.comment}</p>
-              </div>
-            ))}
+            {commentsLoading
+              ? Array.from({ length: 3 }).map((_, index) => (
+                  <CommentSkeleton key={index} />
+                )) // Render 3 comment skeleton loaders
+              : comments.map((comment) => (
+                  <div key={comment.$id} className="bg-white p-4 rounded-lg shadow-lg">
+                    <div className="flex items-center mb-2">
+                      <img src={writerImage} alt="User" className="w-8 h-8 rounded-full mr-2" />
+                      <span className="text-gray-900 font-semibold">{comment.name}</span>
+                    </div>
+                    <p className="text-gray-800">{comment.comment}</p>
+                  </div>
+                ))}
           </div>
         </div>
       </div>
@@ -246,4 +287,5 @@ const BlogDetail = () => {
 };
 
 export default BlogDetail;
+
 

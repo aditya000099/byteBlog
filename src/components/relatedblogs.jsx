@@ -31,6 +31,13 @@ const RelatedBlogs = () => {
     }, []);
 
     const handleBlogClick = (id) => {
+        databases.getDocument("database", "blogs", id).then((response) => {
+            const currentViews = response.views;
+            databases.updateDocument("database", "blogs", id, {
+              views: currentViews + 1,
+            });
+            console.log(currentViews+1);
+          });
         navigate(`/blog/${id}`);
     };
 

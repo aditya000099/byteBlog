@@ -38,6 +38,11 @@ const Signup = () => {
         }
     };
 
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        window.location.href = "/login";
+      };
+
     return (
         <>
         <Header /> 
@@ -54,7 +59,7 @@ const Signup = () => {
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                             required
-                            className="w-full px-3 py-2 bg-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-3 py-2 bg-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-700"
                         />
                     </div>
                     <div className="mb-4">
@@ -66,7 +71,7 @@ const Signup = () => {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
-                            className="w-full px-3 py-2 bg-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-3 py-2 bg-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-700"
                         />
                     </div>
                     <div className="mb-6">
@@ -78,15 +83,24 @@ const Signup = () => {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
-                            className="w-full px-3 py-2 bg-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-3 py-2 bg-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-700"
                         />
                     </div>
                     <button
                         type="submit"
-                        className="w-full py-2 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full py-2 bg-purple-600 hover:bg-purple-700 rounded-lg font-semibold text-white focus:outline-none focus:ring-2 focus:ring-purple-700"
                     >
                         Signup
                     </button>
+                    <p className="text-gray-600 mt-8 text-sm">
+              Already have an account?{" "}
+              <span
+                onClick={handleLogin}
+                className="text-purple-500 cursor-pointer"
+              >
+                Login Here
+              </span>
+            </p>
                 </form>
             </div>
         </div>
