@@ -38,6 +38,7 @@ const FeaturedSection = () => {
       try {
         const response = await databases.listDocuments("database", "blogs", [
           Query.equal("featured", "false"),
+          Query.orderDesc("views"),
         ]);
         setNBlogs(response.documents);
       } catch (error) {
@@ -87,7 +88,7 @@ const FeaturedSection = () => {
             <Skeleton />
           ) : (
             blogs.length > 0 && (
-              <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+              <div className="rounded-xl  bg-fuchsia-50 overflow-hidden">
                 <img
                   src={blogs[0].photo ? blogs[0].photo : sampleImage}
                   alt={blogs[0].title}
@@ -112,16 +113,16 @@ const FeaturedSection = () => {
           )}
         </div>
         <div className="w-full lg:w-1/3">
-        <h1 className="text-2xl font-extrabold mb-10 text-center text-gray-900">
-        Trending Now
+        <h1 className="text-2xl font-bold mb-10 text-center text-gray-900 mt-4">
+        Most Viewed
       </h1>
           {loading2 ? (
             <Skeleton />
           ) : (
-            nblogs.slice(1).map((blog) => (
+            nblogs.slice(0, 5).map((blog) => (
               <div
                 key={blog.$id}
-                className="bg-white rounded-lg shadow-lg p-4 mb-4"
+                className="bg-slate-100 rounded-lg p-4 mb-4"
               >
                 <h2
                   className="text-lg font-semibold"
