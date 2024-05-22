@@ -191,6 +191,7 @@ import logoImage from "../../public/pp.png"; // Replace './logo.png' with the ac
 // import SearchBar from "./searchbar";
 import { Client, Account, Databases, Query } from "appwrite"; // Import Appwrite client and Account
 import Header from "../components/header";
+import './accountpage.css';
 
 const client = new Client()
   .setEndpoint("https://cloud.appwrite.io/v1")
@@ -205,8 +206,22 @@ const databases = new Databases(client);
 // const userid = "";
 
 const Loader = () => (
-  <div className="fixed inset-0 bg-opacity-70 bg-gray-800 flex justify-center items-center z-50">
-    <div className="animate-spin rounded-full h-20 w-20 border-t-2 border-b-2 border-gray-100"></div>
+  <div className="fixed inset-0 bg-opacity-80 bg-slate-50 flex justify-center items-center z-50">
+  <div class="spinner center">
+    <div class="spinner-blade"></div>
+    <div class="spinner-blade"></div>
+    <div class="spinner-blade"></div>
+    <div class="spinner-blade"></div>
+    <div class="spinner-blade"></div>
+    <div class="spinner-blade"></div>
+    <div class="spinner-blade"></div>
+    <div class="spinner-blade"></div>
+    <div class="spinner-blade"></div>
+    <div class="spinner-blade"></div>
+    <div class="spinner-blade"></div>
+    <div class="spinner-blade"></div>
+</div>
+    {/* <div className="animate-spin rounded-full h-20 w-20 border-t-2 border-b-2 border-gray-100"></div> */}
   </div>
 );
 
