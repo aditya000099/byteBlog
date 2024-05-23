@@ -1,8 +1,12 @@
 import React from "react";
+import Header from "../components/header";
 // import "./error/error.css";
 
 const ErrorPage = () => {
   return (
+    <>
+      <Header />
+  
     <div className="flex w-full h-screen items-center justify-center ">
     <style>
       {`.main_wrapper {
@@ -519,6 +523,7 @@ const ErrorPage = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
