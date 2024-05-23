@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import sampleImage from "../../public/cursor.png"; // Replace with the path to your static image
 import { Client, Databases, ID, Storage, Account } from "appwrite";
+import { motion } from "framer-motion";
 
 const client = new Client()
   .setEndpoint("https://cloud.appwrite.io/v1")
@@ -56,8 +57,10 @@ const Blogs = () => {
     </div>
   );
 
+  const transition = { duration: 0.6, ease: [0.43, 0.13, 0.23, 0.96] };
+
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
+    <motion.div exit={{opacity:0}} transition={transition} className="max-w-7xl mx-auto px-4 py-8">
       <h1 className="text-5xl font-bold mb-10 text-center text-gray-700">
         Trending now
       </h1>
@@ -94,7 +97,7 @@ const Blogs = () => {
               </div>
             ))}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

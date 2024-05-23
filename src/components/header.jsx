@@ -78,7 +78,7 @@ const Header = () => {
       </div>
 
       {/* Right side items */}
-      <div className="flex items-center space-x-4">
+      <div className="flex items-center space-x-4 mr-10">
         <SearchBar />
         {/* Conditionally render the "create new blog" icon or login prompt */}
         {isLoggedIn ? (
@@ -102,11 +102,11 @@ const Header = () => {
           {/* <span className="text-gray-500">Login to create</span> */}
 
         {/* Notifications icon with outline and grey color */}
-        <FontAwesomeIcon
+        {/* <FontAwesomeIcon
           icon={faBell}
           size="lg"
           className="cursor-pointer p-2 text-gray-800 fa-fw fa-inverse"
-        />
+        /> */}
 
         {/* Profile page icon */}
         {isLoggedIn ? (
@@ -114,7 +114,7 @@ const Header = () => {
           <FontAwesomeIcon
             icon={faUserCircle}
             size="lg"
-            className="cursor-pointer rounded-full bg-gray-200 text-gray-800 p-2"
+            className="cursor-pointer rounded-full  text-gray-800 p-2"
           />
         </Link>
         ) : (

@@ -80,6 +80,8 @@
 
 
 import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+
 import { useParams, useNavigate } from 'react-router-dom';
 import sampleImage from '../../public/cursor.png'; // Replace with the path to your static image
 import { Client, Databases, ID, Storage, Account, Query } from "appwrite";
@@ -206,7 +208,15 @@ const BlogDetail = () => {
 
   return (
     <>
+    
       <Header />
+      <motion.div
+      className="container mx-auto px-4"
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -50 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="w-full max-w-5xl mx-auto px-4 py-8 bg-slate-100 text-white rounded-lg  mt-12">
         <img src={blog.photo ? blog.photo : sampleImage} alt="Blog" className="w-full h-auto object-cover rounded-3xl mb-4" />
         <h1 className="text-5xl font-bold mb-8 mt-14 text-center text-gray-900">{blog.title}</h1>
@@ -282,6 +292,7 @@ const BlogDetail = () => {
       <RelatedBlogs />
       <div className="mt-16"></div>
       <Footer />
+      </motion.div>
     </>
   );
 };

@@ -13,6 +13,9 @@ import PricingPage from "./pages/pricing";
 import TipTapEditor from "./pages/tiptapeditor";
 import NoUser from "./pages/nologin";
 import UserAccount from "./pages/useraccount";
+
+import { AnimatePresence } from "framer-motion";
+
 // import Tiptapeditor from "./pages/tiptapeditor";
 // import CreateBlogPosts from "./pages/newblogs";
 
@@ -27,10 +30,7 @@ const App = () => {
   //   setTheme(newTheme);
   // };
   const [darkMode, setDarkMode] = useState(true);
-
-  return (
-    <>
-    {/* <div className={darkMode ? 'dark' : ''}>
+  {/* <div className={darkMode ? 'dark' : ''}>
             <div className="p-4 bg-gray-800 text-white flex justify-between">
                 <h1 className="text-xl font-bold">My App</h1>
                 <button
@@ -40,26 +40,28 @@ const App = () => {
                     Toggle Dark Mode
                 </button>
             </div> */}
-      <Router>
-        <Routes>
-          <Route exact path="/" element={<HomePage />} />
-          <Route exact path="/new" element={<CreateBlogPost />} />
-          <Route exact path="/oops" element={<NoUser />} />
-          <Route exact path="/account" element={<UserAccount />} />
-          {/* <Route exact path="/new" element={<TipTapEditor />} /> */}
-          {/* <Route exact path="/newb" element={<CreateBlogPosts />} /> */}
-          <Route exact path="/login" element={<Login/>} />
-          <Route exact path="/signup" element={<Signup/>} />
-          <Route exact path="/dashboard" element={<HomePage/>} />
-          <Route exact path="/pricing" element={<PricingPage/>} />
-          <Route path="/blog/:id" element={<BlogDetail />} />
-          <Route path="/category/:category" element={<CategoryBlogs />} />
-          <Route path="*" element={<ErrorPage />} />
-        </Routes>
-      </Router>
-      {/* </div> */}
-    </>
-  );
+
+            return (
+              <>
+                <Router>
+                  <AnimatePresence mode="wait">
+                    <Routes>
+                      <Route exact path="/" element={<HomePage />} />
+                      <Route exact path="/new" element={<CreateBlogPost />} />
+                      <Route exact path="/oops" element={<NoUser />} />
+                      <Route exact path="/account" element={<UserAccount />} />
+                      <Route exact path="/login" element={<Login />} />
+                      <Route exact path="/signup" element={<Signup />} />
+                      <Route exact path="/dashboard" element={<HomePage />} />
+                      <Route exact path="/pricing" element={<PricingPage />} />
+                      <Route path="/blog/:id" element={<BlogDetail />} />
+                      <Route path="/category/:category" element={<CategoryBlogs />} />
+                      <Route path="*" element={<ErrorPage />} />
+                    </Routes>
+                  </AnimatePresence>
+                </Router>
+              </>
+            );
 };
 
 export default App;

@@ -21,7 +21,7 @@ const Login = () => {
     const checkSession = async () => {
       try {
         await account.getSession("current");
-        window.location.href = "/dashboard"; // Redirect to dashboard if logged in
+        window.location.href = "/"; // Redirect to dashboard if logged in
       } catch {
         // No session found, stay on login page
       }
